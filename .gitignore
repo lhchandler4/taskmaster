@@ -528,3 +528,8 @@ gradle-app.setting
 **/build/
 
 # End of https://www.gitignore.io/api/vim,node,java,emacs,linux,macos,gradle,python,windows,intellij+all,visualstudiocode
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

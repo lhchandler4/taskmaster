@@ -5,8 +5,19 @@
 track of tasks to be done and their status. While we’ll start today with a basic feature set,
  we will continue building out the capabilities of this application over time.
  
-## Deployed Site
-- www.notdeployedyet.com/willdolater
+## API
+- @GetMapping("/tasks")
+    - Get all the tasks
+- @GetMapping("/users/{name}/tasks")
+    - Get all the tasks assigned to an assignee
+- @PostMapping("/tasks")
+    - Post a task 
+- @PutMapping("/tasks/{id}/state")
+    - Changes the status of a task
+- @PutMapping("/tasks/{id}/assign/{assignee}")
+    - Assigns an assignee to a task and sets the status to Assigned
 
-## Troubles with Deployment
-- I am having trouble linking my DynamoDB with the deployed 
+ 
+## Deployed Site
+- http://taskmaster1-dev.us-east-2.elasticbeanstalk.com
+
