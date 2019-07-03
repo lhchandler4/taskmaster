@@ -36,6 +36,7 @@ public class TaskRepositoryTest {
     private static final String title = "do work";
     private static final String description = "do the work";
     private static final String status = "Accepted";
+    private static final String assignee = "Joeish";
 
     @Before
     public void setup() throws Exception {
@@ -50,7 +51,7 @@ public class TaskRepositoryTest {
 
     @Test
     public void readAndWriteTestCase() {
-        Task tonga = new Task(title, description, status);
+        Task tonga = new Task(title, description, status, assignee);
         repository.save(tonga);
 
         List<Task> result = (List<Task>) repository.findAll();

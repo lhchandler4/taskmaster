@@ -2,9 +2,7 @@ package com.taskmasterAWSJava.Java401.taskmaster.LukeAWS;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 public class TaskController {
@@ -14,6 +12,11 @@ public class TaskController {
     @GetMapping("/tasks")
     public Iterable<Task> getTask(){
         return taskRepository.findAll();
+    }
+
+    @GetMapping("/users/{assignee}/tasks")
+    public Iterable<Task> getAssigneeTasks(@PathVariable String assignee){
+        return taskRepository.findByAssignee(assignee);
     }
 
     @PostMapping("/tasks")
@@ -49,4 +52,8 @@ public class TaskController {
         return tasks;
     }
 
+    @DeleteMapping("/tasks/{id}")
+    public void deleteTask(@PathVariable String id){
+        taskRepository.deleteById(id);
+    }
 }
