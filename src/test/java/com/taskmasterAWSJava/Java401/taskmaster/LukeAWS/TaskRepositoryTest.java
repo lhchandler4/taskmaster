@@ -4,7 +4,6 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
 import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
-import javafx.application.Application;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import javafx.application.Application;
+
 
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class TaskRepositoryTest {
 
         tableRequest.setProvisionedThroughput(new ProvisionedThroughput(1L, 1L));
 
-        dynamoDBMapper.batchDelete((List<Task>)repository.findAll());
+//        dynamoDBMapper.batchDelete((List<Task>)repository.findAll());
     }
 
     @Test
