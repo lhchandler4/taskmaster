@@ -6,6 +6,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @EnableScan
-public interface TaskRepository extends CrudRepository<Task, UUID>{
-    Optional<Task> findById(UUID id);
+public interface TaskRepository extends CrudRepository<Task, String>{
+    Optional<Task> findById(String id);
 }
