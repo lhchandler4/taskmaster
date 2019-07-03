@@ -26,6 +26,7 @@ public class TaskController {
         List<Task> allTasks = (List) taskRepository.findAll();
     }
 
+    //Change Status
     @PutMapping("/tasks/{id}/state")
     public List<Task> putState(@PathVariable String id){
         Task task = taskRepository.findById(id).get();
