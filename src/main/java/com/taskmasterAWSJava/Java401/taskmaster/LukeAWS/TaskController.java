@@ -1,6 +1,8 @@
 package com.taskmasterAWSJava.Java401.taskmaster.LukeAWS;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -19,11 +21,22 @@ public class TaskController {
         return taskRepository.findByAssignee(assignee);
     }
 
+//    @PostMapping("/tasks")
+//    public void displayTask(@RequestBody String title, @RequestBody String description, @RequestBody String status, @RequestBody String assignee){
+//        Task newTask = new Task(title, description, status, assignee);
+//        taskRepository.save(newTask);
+//        List<Task> allTasks = (List) taskRepository.findAll();
+//    }
+
     @PostMapping("/tasks")
-    public void displayTask(@RequestParam String title, @RequestParam String description, @RequestParam String status, @RequestParam String assignee){
-        Task newTask = new Task(title, description, status, assignee);
+    public ResponseEntity createTasks(@RequestBody Task newTask){
+        if(newTask.getAssignee() != null){
+            newTask.setStatus("Assigned");
+        } else {
+            newTask.setStatus("Available");
+        }
         taskRepository.save(newTask);
-        List<Task> allTasks = (List) taskRepository.findAll();
+        return new ResponseEntity(newTask, HttpStatus.OK);
     }
 
     //Change Status
