@@ -4,11 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @CrossOrigin
 @RestController
 public class TaskController {
+    private S3Client s3Client;
+
+    @Autowired
+    TaskController(S3Client s3Client) {
+        this.s3Client = s3Client;
+    }
+
     @Autowired
     TaskRepository taskRepository;
 
@@ -22,13 +31,6 @@ public class TaskController {
         return taskRepository.findByAssignee(assignee);
     }
 
-//    @PostMapping("/tasks")
-//    public void displayTask(@RequestBody String title, @RequestBody String description, @RequestBody String status, @RequestBody String assignee){
-//        Task newTask = new Task(title, description, status, assignee);
-//        taskRepository.save(newTask);
-//        List<Task> allTasks = (List) taskRepository.findAll();
-//    }
-
     @PostMapping("/tasks")
     public ResponseEntity createTasks(@RequestBody Task newTask){
         if(newTask.getAssignee() != null){
@@ -38,6 +40,18 @@ public class TaskController {
         }
         taskRepository.save(newTask);
         return new ResponseEntity(newTask, HttpStatus.OK);
+    }
+
+    @PostMapping("/tasks/{id}/images")
+    public Task uploadFile(
+            @PathVariable String id,
+            @RequestPart MultipartFile file
+    ){
+        Task task = taskRepository.findById(id).get();
+        String image = this.s3Client.uploadFile(file);
+        task.setImage(image);
+        taskRepository.save(task);
+        return task;
     }
 
     //Change Status
