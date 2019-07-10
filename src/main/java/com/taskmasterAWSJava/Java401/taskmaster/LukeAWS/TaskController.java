@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -43,13 +44,13 @@ public class TaskController {
     }
 
     @PostMapping("/tasks/{id}/images")
-    public Task uploadFile(
-            @PathVariable String id,
-            @RequestPart MultipartFile file
-    ){
+    public Task uploadFile(@PathVariable String id, @RequestPart(value = "file") MultipartFile file){
         Task task = taskRepository.findById(id).get();
         String image = this.s3Client.uploadFile(file);
         task.setImage(image);
+        String[] pics = image.split("/");
+        String thumbnail = pics[pics.length -1];
+        task.setThumbnailImage("https://serverless-taskmaster-app-resized.s3.us-east-2.amazonaws.com/resized-" + thumbnail);
         taskRepository.save(task);
         return task;
     }

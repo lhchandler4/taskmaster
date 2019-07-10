@@ -14,6 +14,15 @@ public class Task {
     @DynamoDBAttribute
     private String assignee;
     private String image;
+    private String thumbnailImage;
+
+    public String getThumbnailImage() {
+        return thumbnailImage;
+    }
+
+    public void setThumbnailImage(String thumbnailImage) {
+        this.thumbnailImage = thumbnailImage;
+    }
 
     @DynamoDBAttribute
     public String getImage() {
@@ -33,13 +42,15 @@ public class Task {
         this.assignee = assignee;
     }
 
-    public Task(String title, String description, String status, String assignee, String image){
+    public Task(String title, String description, String status, String assignee, String image, String thumbnailImage){
         this(title, description, status, assignee);
         this.image = image;
+        this.thumbnailImage = thumbnailImage;
     }
 
-    public Task(String image){
+    public Task(String image, String thumbnailImage){
         this.image = image;
+        this.thumbnailImage = thumbnailImage;
     }
 
     @DynamoDBHashKey

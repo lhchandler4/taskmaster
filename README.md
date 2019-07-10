@@ -12,12 +12,24 @@ track of tasks to be done and their status. While we’ll start today with a bas
     - Get all the tasks assigned to an assignee
 - @PostMapping("/tasks")
     - Post a task 
+- @PostMapping("/tasks/{id}/images")
+    - Post a image to be associated with a task
 - @PutMapping("/tasks/{id}/state")
     - Changes the status of a task
 - @PutMapping("/tasks/{id}/assign/{assignee}")
     - Assigns an assignee to a task and sets the status to Assigned
+- @DeleteMapping("/tasks/{id}")
+    - Delete a task
 
  
 ## Deployed Site
 - http://taskmaster1-dev.us-east-2.elasticbeanstalk.com
+
+## How to use the Lambda function
+
+## Issues with Lambda deployment
+- Encountered a lot of issues. The first was with IAM user permissions.
+Solved that problem and then there were many issues with my actual lambda function.
+This was probably due to the fact that I was modifying the lambda resizing function
+from https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html. 
 
