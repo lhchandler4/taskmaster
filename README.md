@@ -28,7 +28,9 @@ track of tasks to be done and their status. While we’ll start today with a bas
     -  http://serverless-taskmaster-app.s3-website.us-east-2.amazonaws.com
 
 ## How to use the Lambda function
-
+- The lambda function will automatically resize the image which is uploaded to the 
+front end website to a 50px by 50px thumbnail and the url to that image will be available
+in the JSON data that is displayed after submission of the image
 
 ## Issues with Lambda deployment
 - Encountered a lot of issues. The first was with IAM user permissions.
