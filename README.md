@@ -21,6 +21,9 @@ track of tasks to be done and their status. While we’ll start today with a bas
 - @DeleteMapping("/tasks/{id}")
     - Delete a task
 
+- When a task is deleted from Dynamo, trigger a message that will fire a lambda to remove any images associated to it from S3
+- Instead of having S3 run the resizer automatically on upload, evaluate the size of the image in your Java code and then send
+ a message to a Q, that will in turn trigger the lambda resizer -- only when the image > 350k
  
 ## Deployed Site
 - http://taskmaster1-dev.us-east-2.elasticbeanstalk.com
@@ -38,3 +41,6 @@ Solved that problem and then there were many issues with my actual lambda functi
 This was probably due to the fact that I was modifying the lambda resizing function
 from https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html. 
 
+## Issues with SNS 
+- Still experiencing difficulties with SNS and getting it to send a text message. 
+Interacting with SES is also hard to trouble shoot. I put the routes in controller for SNS.
