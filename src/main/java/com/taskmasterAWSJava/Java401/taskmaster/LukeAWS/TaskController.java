@@ -80,6 +80,17 @@ public class TaskController {
         taskRepository.save(task);
         List<Task> tasks = (List) taskRepository.findAll();
         return tasks;
+
+        AmazonSNSClient snsClient = new AmazonSNSClient();
+        String message = "My SMS message";
+        String phoneNumber = "+1XXXXXX2092";
+        Map<String, MessageAttributeValue> smsAttributes = new HashMap<String, MessageAttributeValue>();
+        sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
+    }
+
+    public static void sendSMSMessage(AmazonSNSClient snsClient, String message, String phoneNumber, Map<String, MessageAttributeValue> smsAttributes) {
+        PublishResult result = snsClient.publish(new PublishRequest().withMessage(message).withPhoneNumber(phoneNumber).withMessageAttributes(smsAttributes));
+        System.out.println(result);
     }
 
     @DeleteMapping("/tasks/{id}")

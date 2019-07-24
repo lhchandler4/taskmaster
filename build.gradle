@@ -26,4 +26,5 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile 'com.github.derjust:spring-data-dynamodb:5.1.0'
 	compile 'com.amazonaws:aws-java-sdk-dynamodb:1.11.585'
+	implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.228')
 }
